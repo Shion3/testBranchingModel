@@ -1,0 +1,340 @@
+<%@ Master Language="C#" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="SPSWC" Namespace="Microsoft.SharePoint.Portal.WebControls"
+    Assembly="Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
+    Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
+    Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls"
+    Assembly="Microsoft.SharePoint.Publishing, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation"
+    Assembly="Microsoft.SharePoint.Publishing, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="wssuc" TagName="Welcome" Src="~/_controltemplates/Welcome.ascx" %>
+<%@ Register TagPrefix="wssuc" TagName="DesignModeConsole" Src="~/_controltemplates/DesignModeConsole.ascx" %>
+<%@ Register TagPrefix="WpNs0" Namespace="Microsoft.SharePoint.Portal.WebControls"
+    Assembly="Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingVariations" TagName="VariationsLabelMenu" Src="~/_controltemplates/VariationsLabelMenu.ascx" %>
+<%@ Register TagPrefix="PublishingConsole" TagName="Console" Src="~/_controltemplates/PublishingConsole.ascx" %>
+<%@ Register TagPrefix="PublishingSiteAction" TagName="SiteActionMenu" Src="~/_controltemplates/PublishingActionMenu.ascx" %>
+<%@ Register TagPrefix="SharePoint" Namespace="MTI.Common.WebControls" Assembly="MTI.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=53c6b1b6530557a0" %>
+<html>
+<WebPartPages:SPWebPartManager ID="SPWebPartManager1" runat="server"/>
+<SharePoint:RobotsMetaTag ID="RobotsMetaTag1" runat="server"/>
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder runat="server" ID="head">
+		<title>
+            <asp:ContentPlaceHolder ID="PlaceHolderPageTitle" runat="server" />
+        </title>
+    </asp:ContentPlaceHolder>
+    <SharePoint:CssLink ID="CssLink1" runat="server" DefaultUrl="/_layouts/1033/STYLES/MTI_css/MTI_MeetingMaster3.css"/>
+    <asp:ContentPlaceHolder ID="PlaceHolderAdditionalPageHead" runat="server" />
+</head>
+<body onload="javascript:_spBodyOnLoadWrapper();">
+    <form id="Form1" runat="server" onsubmit="return _spFormOnSubmitWrapper();">
+    <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
+    <SharePoint:ChangeView ID="ChangeView" runat="server"></SharePoint:ChangeView>
+    <div id="main">
+        <!-- TOP -->
+        <div id="top">
+            <div id="divabc">
+                <div id="diva"></div>
+                <div id="divb"></div>
+                <div id="divc"></div>
+            </div>
+            <div id="globalLinks">
+                <asp:ContentPlaceHolder ID="PlaceHolderGlobalNavigation" runat="server">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td colspan="4" class="ms-globalbreadcrumb">
+                                <span id="TurnOnAccessibility" style="display: none"><a href="#" class="ms-skip"
+                                    onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();return false;">
+                                    <SharePoint:EncodedLiteral ID="EncodedLiteral1" runat="server" Text="<%$Resources:wss,master_turnonaccessibility%>"
+                                        EncodeMethod="HtmlEncode"/></a> </span><a id="A1" href="javascript:;" onclick="javascript:this.href='#mainContent';"
+                                            class="ms-skip" accesskey="<%$Resources:wss,maincontent_accesskey%>" runat="server">
+                                            <SharePoint:EncodedLiteral ID="EncodedLiteral2" runat="server" Text="<%$Resources:wss,mainContentLink%>"
+                                                EncodeMethod="HtmlEncode"/></a>
+                                <table cellpadding="0" cellspacing="0" height="100%" class="ms-globalright">
+                                    <tr>
+                                        <td valign="middle" class="ms-globallinks" style="padding-left: 3px; padding-right: 6px;">
+                                            <SharePoint:DelegateControl ID="DelegateControl2" runat="server" ControlId="GlobalSiteLink0"/>
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            <wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
+                                            </wssuc:Welcome>
+                                        </td>
+                                        <td style="padding-left: 1px; padding-right: 3px;" class="ms-globallinks">
+                                            |
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            <table cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td class="ms-globallinks">
+                                                        <SharePoint:DelegateControl ID="DelegateControl3" ControlId="GlobalSiteLink1" Scope="Farm"
+                                                            runat="server"/>
+                                                    </td>
+                                                    <td class="ms-globallinks">
+                                                        <SharePoint:DelegateControl ID="DelegateControl4" ControlId="GlobalSiteLink2" Scope="Farm"
+                                                            runat="server"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            &nbsp; <a href="javascript:TopHelpButtonClick('NavBarHelpHome')" accesskey="<%$Resources:wss,multipages_helplink_accesskey%>"
+                                                id="TopHelpLink" title="<%$Resources:wss,multipages_helplinkalt_text%>" runat="server">
+                                                <img id="Img1" align='absmiddle' border="0" src="/_layouts/images/helpicon.gif" alt="<%$Resources:wss,multipages_helplinkalt_text%>"
+                                                    runat="server"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="nav-wrapper">
+                <asp:ContentPlaceHolder ID="PlaceHolderTopNavBar" runat="server">
+					<div id="nav-menu">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td nowrap valign="middle">
+                                </td>
+                                <td>
+                                    <asp:ContentPlaceHolder ID="PlaceHolderHorizontalNav" runat="server">
+										<SharePoint:AspMenu ID="TopNavigationMenu" runat="server" DataSourceID="topSiteMap"
+                                            EnableViewState="false" AccessKey="<%$Resources:wss,navigation_accesskey%>" Orientation="Horizontal"
+                                            StaticDisplayLevels="2" MaximumDynamicDisplayLevels="3" DynamicHorizontalOffset="0"
+                                            StaticPopOutImageUrl="/_layouts/images/menudark.gif" StaticPopOutImageTextFormatString=""
+                                            SkipLinkText="" StaticSubMenuIndent="0" CssClass="topNavContainer">
+                                            <StaticMenuStyle />
+                                            <StaticMenuItemStyle CssClass="topnav" ItemSpacing="0px" />
+                                            <StaticSelectedStyle CssClass="topnavselected" />
+                                            <StaticHoverStyle CssClass="topNavHover" />
+                                            <DynamicMenuStyle CssClass="topNavFlyOutsContainer" />
+                                            <DynamicMenuItemStyle CssClass="topNavFlyOuts" />
+                                            <DynamicHoverStyle CssClass="topNavFlyOutsHover" />
+                                            <DynamicSelectedStyle CssClass="topNavFlyOutsSelected" />
+                                        </SharePoint:AspMenu>
+                                        <SharePoint:DelegateControl ID="DelegateControl1" runat="server" ControlId="TopNavigationDataSource">
+                                            <Template_Controls>
+                                                <asp:SiteMapDataSource ShowStartingNode="False" SiteMapProvider="SPNavigationProvider"
+                                                    ID="topSiteMap" runat="server" StartingNodeUrl="sid:1002" />
+                                            </Template_Controls>
+                                        </SharePoint:DelegateControl>
+                                    </asp:ContentPlaceHolder>
+                                </td>
+                                <td class="ms-banner">
+                                    &nbsp;&nbsp;
+                                </td>
+                                <td align="right" style="position: relative; bottom: 0; left: 0; padding-right: 5px;">
+                                    <table height="100%" class="ms-siteaction" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ms-siteactionsmenu" id="siteactiontd">
+                                                <SharePoint:SiteActions runat="server" AccessKey="<%$Resources:wss,tb_SiteActions_AK%>"
+                                                    ID="SiteActionsMenuMain" PrefixHtml="&lt;div&gt;&lt;div&gt;" SuffixHtml="&lt;/div&gt;&lt;/div&gt;"
+                                                    MenuNotVisibleHtml="&amp;nbsp;">
+                                                    <CustomTemplate>
+                                                        <SharePoint:FeatureMenuTemplate ID="FeatureMenuTemplate1" runat="server" FeatureScope="Site"
+                                                            Location="Microsoft.SharePoint.StandardMenu" GroupId="SiteActions" UseShortId="true">
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_Create" Text="<%$Resources:wss,viewlsts_pagetitle_create%>"
+                                                                Description="<%$Resources:wss,siteactions_createdescription%>" ImageUrl="/_layouts/images/Actionscreate.gif"
+                                                                MenuGroupId="100" Sequence="100" UseShortId="true" ClientOnClickNavigateUrl="~site/_layouts/create.aspx"
+                                                                PermissionsString="ManageLists, ManageSubwebs" PermissionMode="Any" />
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_EditPage" Text="<%$Resources:wss,siteactions_editpage%>"
+                                                                Description="<%$Resources:wss,siteactions_editpagedescription%>" ImageUrl="/_layouts/images/ActionsEditPage.gif"
+                                                                MenuGroupId="100" Sequence="200" ClientOnClickNavigateUrl="javascript:MSOLayout_ChangeLayoutMode(false);" />
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_Settings" Text="<%$Resources:wss,settings_pagetitle%>"
+                                                                Description="<%$Resources:wss,siteactions_sitesettingsdescription%>" ImageUrl="/_layouts/images/ActionsSettings.gif"
+                                                                MenuGroupId="100" Sequence="300" UseShortId="true" ClientOnClickNavigateUrl="~site/_layouts/settings.aspx"
+                                                                PermissionsString="EnumeratePermissions,ManageWeb,ManageSubwebs,AddAndCustomizePages,ApplyThemeAndBorder,ManageAlerts,ManageLists,ViewUsageData"
+                                                                PermissionMode="Any" />
+                                                        </SharePoint:FeatureMenuTemplate>
+                                                    </CustomTemplate>
+                                                </SharePoint:SiteActions>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="searchArea">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                    	<td id="siteTitle" align="left">
+                    	<SharePoint:ProjectProperty ID="ProjectProperty1" Property="Title" runat="server"></SharePoint:ProjectProperty>
+                    	</td>
+                        <td align="right" style="padding: 0 5px 0 -5px;">
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="search-label">
+                                                    Search:
+                                                </td>
+                                                <td>
+                                                    <SPSWC:SearchBoxEx ID="StdSearch" runat="server" GoImageUrl="/_layouts/MTI/Images/Open_Master_doc_Search_btn3.gif"
+                                                        GoImageUrlRTL="/_layouts/MTI/Images/Open_Master_doc_Search_btn3.gif" GoImageActiveUrlRTL="/_layouts/MTI/Images/Open_Master_doc_Search_btn3.gif"
+                                                        GoImageActiveUrl="/_layouts/MTI/Images/Open_Master_doc_Search_btn3.gif" DropDownModeEx="HideScopeDD"
+                                                        ChromeType="None" TextBeforeDropDown="" TextBeforeTextBox="" ShowAdvancedSearch="false"
+                                                        SearchResultPageURL="<%$SPUrl:~site/_layouts/MTI/SearchResult.aspx%>" UseSiteDefaults="false"
+                                                        __WebPartId="{66AB7E1C-ACAE-4E52-995A-C1FA5CD7F405}" Width="150px" CssClass=""
+                                                        TextBoxWidth="100"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="search-links">
+                                                    <asp:LinkButton PostBackUrl="<%$SPUrl:~site/_layouts/MTI/AdvancedSearch.aspx%>" Text="Advanced Search"
+                                                        ID="lnkBtnAdvancedSearch" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="search-label">
+                                                    Find Staff:
+                                                </td>
+                                                <td>
+                                                    <SPSWC:SearchBoxEx ID="StaffDirSearch" runat="server" GoImageUrl="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif"
+                                                        GoImageUrlRTL="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif" GoImageActiveUrlRTL="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif"
+                                                        GoImageActiveUrl="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif" DropDownModeEx="ShowDD_DefaultURL"
+                                                        ChromeType="None" TextBeforeDropDown="" TextBeforeTextBox="" ShowAdvancedSearch="false" ScopeDisplayGroupName="Staff Search"
+                                                        SearchResultPageURL="<%$SPUrl:~site/_layouts/MTI/StaffSearchResult.aspx%>" UseSiteDefaults="false"
+                                                        __WebPartId="{AEFE2E37-C185-4e26-8933-998C6177F000}" Width="150px" CssClass="" TextBoxWidth="100"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="search-links">
+                                                    <a href="<% $SPUrl:~sitecollection/Lists/MTIStaffDirectory/ByDivision.aspx%>" ID="lnkBtnStaffDirectory" runat="server">Staff Directory</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- CONTENT -->
+        <div id="mti-content">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <asp:ContentPlaceHolder ID="WSSDesignConsole" runat="server">
+                    <wssuc:designmodeconsole id="IdDesignModeConsole" runat="server" />
+                </asp:ContentPlaceHolder>
+                <tr>
+                    <td>
+                        <asp:SiteMapPath SiteMapProvider="SPContentMapProvider" ID="SiteMapPath2" SkipLinkText=""
+                            NodeStyle-CssClass="ms-sitemapdirectional" runat="server" />
+    <SharePoint:HyperlinkToClosedSite ID="linkToClosedSite" runat="server" CssClass="ms-sitemapdirectional"></SharePoint:HyperlinkToClosedSite>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="mti_separator" style="height:20px"></td>
+                </tr>
+                <tr>
+                    <td id="pagetitle">
+                        <asp:ContentPlaceHolder ID="PlaceHolderPageTitleInTitleArea" runat="server" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- FOOTER -->
+        <div id="footer">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                 <td id="footer-privacy">
+<%--                         <a id="A2" href="/PrivacyStatement.aspx" style="color: White" runat="server">Privacy Statement</a>
+                        <img src="/_layouts/MTI/Images/footer_links_separator.jpg" alt="">
+                         <a id="A3" href="/termsofuse.aspx" style="color: White" runat="server">Terms of Use</a>
+                        <img src="/_layouts/MTI/Images/footer_links_separator.jpg" alt="">
+--%>                        <a id="A4" href="<%$SPUrl:~sitecollection/Lists/Survey/NewForm.aspx%>" style="color: White" runat="server">Rate MTI Intranet</a>                        
+                    </td>
+                    <td id="footer-copyright">
+                        &copy 2010 Ministry of Trade and Industry
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- OTHER REQUIRED PLACEHOLDERS (HIDDEN) -->
+    <asp:Panel ID="Panel1" Visible="false" runat="server">
+        <!-- PRIMARY NAVIGATION -->
+        <SharePoint:AspMenu ID="GlobalNav" runat="server" DataSourceID="topNavDS" Orientation="Horizontal" StaticDisplayLevels="1" MaximumDynamicDisplayLevels="0" StaticSubMenuIndent="0" DynamicHorizontalOffset="0" StaticEnableDefaultPopOutImage="false" ItemWrap="false" SkipLinkText="<%$Resources:cms,masterpages_skiplinktext%>" CssClass="globalNav">
+			<StaticMenuItemStyle CssClass="globalNavItem" ItemSpacing="0px" />
+			<StaticSelectedStyle CssClass="globalNavItemActive" />
+			<StaticHoverStyle CssClass="globalNavItemHover" />
+			<DynamicMenuStyle CssClass="globalNavMenu" />
+			<DynamicMenuItemStyle CssClass="globalNavMenuItem" />
+			<DynamicHoverStyle CssClass="globalNavMenuItemHover" />
+			<DynamicSelectedStyle CssClass="globalNavMenuItemActive" />
+		</SharePoint:AspMenu>
+		<PublishingNavigation:PortalSiteMapDataSource id="topNavDS" runat="server" sitemapprovider="CombinedNavSiteMapProvider" enableviewstate="true" startfromcurrentnode="true" startingnodeoffset="0" showstartingnode="false" treatstartingnodeascurrent="true" trimnoncurrenttypes="Heading" />
+        <asp:ContentPlaceHolder ID="PlaceHolderSearchArea" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderPageDescription" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderPageImage" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyLeftBorder" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleLeftBorder" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleAreaSeparator" runat="server" />
+        <asp:ContentPlaceHolder ID="OSSConsole" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleRightMargin" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyAreaClass" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleAreaClass" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyRightMargin" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderLeftNavBarTop" runat="server" />
+        <!-- SECONDARY NAVIGATION -->
+        <asp:ContentPlaceHolder ID="PlaceHolderCalendarNavigator" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderLeftNavBar" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderLeftActions" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderNavSpacer" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleBreadcrumb" runat="server" />
+<asp:ContentPlaceHolder ID="PlaceHolderMiniConsole" runat="server" />
+    </asp:Panel>
+    <%--hide title and show contentlink--%>
+    <script type="text/javascript">
+    function HideScopeDDL()
+    {
+        var inputs = document.getElementsByTagName('SELECT');
+        for(var i=0;i<inputs.length;i++)
+        {
+	        var input = inputs[i];
+	        if(input.id!=null && input.id.indexOf('StaffDirSearch')>0){
+		        input.style.display = 'none';
+	        }
+        }
+    }
+
+    HideScopeDDL();
+    
+     var contentLink = document.getElementById('EditContent');
+     var titleLink = document.getElementById('pagetitle');
+     if(contentLink!=null)
+     {
+     titleLink.style.display = 'block';
+     }
+     else
+     {
+     titleLink.style.display = 'none';
+     }
+    </script>    
+    </form>
+</body>
+</html>

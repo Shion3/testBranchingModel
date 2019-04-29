@@ -1,0 +1,836 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="SPSWC" Namespace="Microsoft.SharePoint.Portal.WebControls"
+    Assembly="Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
+    Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
+    Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls"
+    Assembly="Microsoft.SharePoint.Publishing, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation"
+    Assembly="Microsoft.SharePoint.Publishing, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="wssuc" TagName="Welcome" Src="~/_controltemplates/Welcome.ascx" %>
+<%@ Register TagPrefix="wssuc" TagName="DesignModeConsole" Src="~/_controltemplates/DesignModeConsole.ascx" %>
+<%@ Register TagPrefix="WpNs0" Namespace="Microsoft.SharePoint.Portal.WebControls"
+    Assembly="Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="PublishingVariations" TagName="VariationsLabelMenu" Src="~/_controltemplates/VariationsLabelMenu.ascx" %>
+<%@ Register TagPrefix="PublishingConsole" TagName="Console" Src="~/_controltemplates/PublishingConsole.ascx" %>
+<%@ Register TagPrefix="PublishingSiteAction" TagName="SiteActionMenu" Src="~/_controltemplates/PublishingActionMenu.ascx" %>
+<%@ Register TagPrefix="SharePoint" Namespace="MTI.Common.WebControls" Assembly="MTI.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=53c6b1b6530557a0" %>
+<html>
+<WebPartPages:SPWebPartManager ID="SPWebPartManager1" runat="server" />
+<SharePoint:RobotsMetaTag ID="RobotsMetaTag1" runat="server" />
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder runat="server" ID="head">
+        <title>
+            <asp:ContentPlaceHolder ID="PlaceHolderPageTitle" runat="server" />
+        </title>
+    </asp:ContentPlaceHolder>
+    <SharePoint:CssLink ID="CssLink1" runat="server" DefaultUrl="/_layouts/1033/STYLES/MTI_css/MTI_Master.css" />
+    <asp:ContentPlaceHolder ID="PlaceHolderAdditionalPageHead" runat="server" />
+</head>
+<script language="JavaScript">
+
+//add an entry to the _spBodyOnLoadFunctionNames array
+
+//so that our function will run on the pageLoad event
+
+function rewriteLinks() {
+
+   var anchors = document.getElementsByTagName("a");
+
+     //loop through the array
+
+     for (var x=0; x<anchors.length; x++) {
+
+     //does this anchor element contain #openinnewwindow?
+
+          if (anchors[x].outerHTML.indexOf('#openinnewwindow')>0) 
+{
+
+               
+//store the HTML for this anchor element
+
+                
+oldText = anchors[x].outerHTML;
+
+               
+//rewrite the URL to remove our test text and add a target instead
+
+               
+newText = oldText.replace(/#openinnewwindow/,'" target="_blank');
+
+               
+//write the HTML back to the browser
+
+               
+anchors[x].outerHTML = newText;
+
+          }
+
+     }  
+
+}
+
+</script>
+<body onload="javascript:_spBodyOnLoadWrapper();rewriteLinks();">
+    <form id="Form1" runat="server" onsubmit="return _spFormOnSubmitWrapper();">
+    <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
+    <SharePoint:ChangeView ID="ChangeView" runat="server"></SharePoint:ChangeView>
+    <div id="main">
+        <!-- TOP -->
+        <div id="top">
+            <div id="divabc">
+                <div id="diva"></div>
+                <div id="divb"></div>
+                <div id="divc"></div>
+            </div>
+            <div id="globalLinks">
+                <asp:ContentPlaceHolder ID="PlaceHolderGlobalNavigation" runat="server">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td colspan="4" class="ms-globalbreadcrumb">
+                                <span id="TurnOnAccessibility" style="display: none"><a href="#" class="ms-skip"
+                                    onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();return false;">
+                                    <SharePoint:EncodedLiteral ID="EncodedLiteral1" runat="server" Text="<%$Resources:wss,master_turnonaccessibility%>"
+                                        EncodeMethod="HtmlEncode" /></a> </span><a id="A1" href="javascript:;" onclick="javascript:this.href='#mainContent';"
+                                            class="ms-skip" accesskey="<%$Resources:wss,maincontent_accesskey%>" runat="server">
+                                            <SharePoint:EncodedLiteral ID="EncodedLiteral2" runat="server" Text="<%$Resources:wss,mainContentLink%>"
+                                                EncodeMethod="HtmlEncode" /></a>
+                                <table cellpadding="0" cellspacing="0" height="100%" class="ms-globalright">
+                                    <tr>
+                                        <td valign="middle" class="ms-globallinks" style="padding-left: 3px; padding-right: 6px;">
+                                            <SharePoint:DelegateControl ID="DelegateControl2" runat="server" ControlId="GlobalSiteLink0" />
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            <wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
+                                            </wssuc:Welcome>
+                                        </td>
+                                        <td style="padding-left: 1px; padding-right: 3px;" class="ms-globallinks">
+                                            |
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            <table cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td class="ms-globallinks">
+                                                        <SharePoint:DelegateControl ID="DelegateControl3" ControlId="GlobalSiteLink1" Scope="Farm"
+                                                            runat="server" />
+                                                    </td>
+                                                    <td class="ms-globallinks">
+                                                        <SharePoint:DelegateControl ID="DelegateControl4" ControlId="GlobalSiteLink2" Scope="Farm"
+                                                            runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="middle" class="ms-globallinks">
+                                            &nbsp; <a href="javascript:TopHelpButtonClick('NavBarHelpHome')" accesskey="<%$Resources:wss,multipages_helplink_accesskey%>"
+                                                id="TopHelpLink" title="<%$Resources:wss,multipages_helplinkalt_text%>" runat="server">
+                                                <img id="Img1" align='absmiddle' border="0" src="/_layouts/images/helpicon.gif" alt="<%$Resources:wss,multipages_helplinkalt_text%>"
+                                                    runat="server"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="nav-wrapper">
+                <asp:ContentPlaceHolder ID="PlaceHolderTopNavBar" runat="server">
+                    <div id="nav-menu">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td nowrap valign="middle">
+                                </td>
+                                <td>
+                                    <asp:ContentPlaceHolder ID="PlaceHolderHorizontalNav" runat="server">
+                                        <SharePoint:AspMenu ID="TopNavigationMenu" runat="server" DataSourceID="topSiteMap"
+                                            EnableViewState="false" AccessKey="<%$Resources:wss,navigation_accesskey%>" Orientation="Horizontal"
+                                            StaticDisplayLevels="2" MaximumDynamicDisplayLevels="3" DynamicHorizontalOffset="0"
+                                            StaticPopOutImageUrl="/_layouts/images/menudark.gif" StaticPopOutImageTextFormatString=""
+                                            SkipLinkText="" StaticSubMenuIndent="0" CssClass="topNavContainer">
+                                            <StaticMenuStyle />
+                                            <StaticMenuItemStyle CssClass="topnav" ItemSpacing="0px" />
+                                            <StaticSelectedStyle CssClass="topnavselected" />
+                                            <StaticHoverStyle CssClass="topNavHover" />
+                                            <DynamicMenuStyle CssClass="topNavFlyOutsContainer" />
+                                            <DynamicMenuItemStyle CssClass="topNavFlyOuts" />
+                                            <DynamicHoverStyle CssClass="topNavFlyOutsHover" />
+                                            <DynamicSelectedStyle CssClass="topNavFlyOutsSelected" />
+                                        </SharePoint:AspMenu>
+                                        <SharePoint:DelegateControl ID="DelegateControl1" runat="server" ControlId="TopNavigationDataSource">
+                                            <Template_Controls>
+                                                <asp:SiteMapDataSource ShowStartingNode="False" SiteMapProvider="SPNavigationProvider"
+                                                    ID="topSiteMap" runat="server" StartingNodeUrl="sid:1002" />
+                                            </Template_Controls>
+                                        </SharePoint:DelegateControl>
+                                    </asp:ContentPlaceHolder>
+                                </td>
+                                <td class="ms-banner">
+                                    &nbsp;&nbsp;
+                                </td>
+                                <td align="right" style="position: relative; bottom: 0; left: 0; padding-right: 5px;">
+                                    <table height="100%" class="ms-siteaction" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ms-siteactionsmenu" id="siteactiontd">
+                                                <SharePoint:SiteActions runat="server" AccessKey="<%$Resources:wss,tb_SiteActions_AK%>"
+                                                    ID="SiteActionsMenuMain" PrefixHtml="&lt;div&gt;&lt;div&gt;" SuffixHtml="&lt;/div&gt;&lt;/div&gt;"
+                                                    MenuNotVisibleHtml="&amp;nbsp;">
+                                                    <CustomTemplate>
+                                                        <SharePoint:FeatureMenuTemplate ID="FeatureMenuTemplate1" runat="server" FeatureScope="Site"
+                                                            Location="Microsoft.SharePoint.StandardMenu" GroupId="SiteActions" UseShortId="true">
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_Create" Text="<%$Resources:wss,viewlsts_pagetitle_create%>"
+                                                                Description="<%$Resources:wss,siteactions_createdescription%>" ImageUrl="/_layouts/images/Actionscreate.gif"
+                                                                MenuGroupId="100" Sequence="100" UseShortId="true" ClientOnClickNavigateUrl="~site/_layouts/create.aspx"
+                                                                PermissionsString="ManageLists, ManageSubwebs" PermissionMode="Any" />
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_EditPage" Text="<%$Resources:wss,siteactions_editpage%>"
+                                                                Description="<%$Resources:wss,siteactions_editpagedescription%>" ImageUrl="/_layouts/images/ActionsEditPage.gif"
+                                                                MenuGroupId="100" Sequence="200" ClientOnClickNavigateUrl="javascript:MSOLayout_ChangeLayoutMode(false);" />
+                                                            <SharePoint:MenuItemTemplate runat="server" ID="MenuItem_Settings" Text="<%$Resources:wss,settings_pagetitle%>"
+                                                                Description="<%$Resources:wss,siteactions_sitesettingsdescription%>" ImageUrl="/_layouts/images/ActionsSettings.gif"
+                                                                MenuGroupId="100" Sequence="300" UseShortId="true" ClientOnClickNavigateUrl="~site/_layouts/settings.aspx"
+                                                                PermissionsString="EnumeratePermissions,ManageWeb,ManageSubwebs,AddAndCustomizePages,ApplyThemeAndBorder,ManageAlerts,ManageLists,ViewUsageData"
+                                                                PermissionMode="Any" />
+                                                        </SharePoint:FeatureMenuTemplate>
+                                                    </CustomTemplate>
+                                                </SharePoint:SiteActions>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="searchArea">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td align="right" style="padding: 0 5px 0 5px;">
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="search-label">
+                                                    Search:
+                                                </td>
+                                                <td>
+                                                    <SPSWC:SearchBoxEx ID="StdSearch" runat="server" GoImageUrl="/_layouts/MTI/Images/Home_Master_doc_Search_btn.gif"
+                                                        GoImageUrlRTL="/_layouts/MTI/Images/Home_Master_doc_Search_btn.gif" GoImageActiveUrlRTL="/_layouts/MTI/Images/Home_Master_doc_Search_btn.gif"
+                                                        GoImageActiveUrl="/_layouts/MTI/Images/Home_Master_doc_Search_btn.gif" DropDownModeEx="HideScopeDD"
+                                                        ChromeType="None" TextBeforeDropDown="" TextBeforeTextBox="" ShowAdvancedSearch="false"
+                                                        SearchResultPageURL="<%$SPUrl:~site/_layouts/MTI/SearchResult.aspx%>" UseSiteDefaults="false"
+                                                        __WebPartId="{66AB7E1C-ACAE-4E52-995A-C1FA5CD7F405}" Width="150px" CssClass="" TextBoxWidth="100" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="search-links">
+                                                    <asp:LinkButton PostBackUrl="<%$SPUrl:~site/_layouts/MTI/AdvancedSearch.aspx%>" Text="Advanced Search"
+                                                        ID="lnkBtnAdvancedSearch" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="search-label">
+                                                    Find Staff:
+                                                </td>
+                                                <td>
+                                                    <SPSWC:SearchBoxEx ID="StaffDirSearch" runat="server" GoImageUrl="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif"
+                                                        GoImageUrlRTL="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif" GoImageActiveUrlRTL="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif"
+                                                        GoImageActiveUrl="/_layouts/MTI/Images/Home_Master_people_Search_btn.gif" DropDownModeEx="ShowDD_DefaultURL"
+                                                        ChromeType="None" TextBeforeDropDown="" TextBeforeTextBox="" ShowAdvancedSearch="false" ScopeDisplayGroupName="Staff Search"
+                                                        SearchResultPageURL="<%$SPUrl:~site/_layouts/MTI/StaffSearchResult.aspx%>" UseSiteDefaults="false"
+                                                        __WebPartId="{AEFE2E37-C185-4e26-8933-998C6177F000}" Width="150px" CssClass="" TextBoxWidth="100"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="search-links">
+                                                    <a href="<% $SPUrl:~sitecollection/Lists/MTIStaffDirectory/ByDivision.aspx%>" ID="lnkBtnStaffDirectory" runat="server">Staff Directory</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
+        <!-- CONTENT -->
+        <div id="mti-content">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <asp:ContentPlaceHolder ID="WSSDesignConsole" runat="server">
+                    <wssuc:designmodeconsole id="IdDesignModeConsole" runat="server" />
+                </asp:ContentPlaceHolder>
+                <tr>
+                    <td>
+                        <asp:SiteMapPath SiteMapProvider="SPContentMapProvider" ID="SiteMapPath2" SkipLinkText=""
+                            NodeStyle-CssClass="ms-sitemapdirectional" runat="server" />
+    <SharePoint:HyperlinkToClosedSite ID="linkToClosedSite" runat="server" CssClass="ms-sitemapdirectional"></SharePoint:HyperlinkToClosedSite>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="mti_separator" style="height:10px"></td>
+                </tr>
+                <tr>
+                    <td id="pagetitle">
+                        <asp:ContentPlaceHolder ID="PlaceHolderPageTitleInTitleArea" runat="server" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+			        <table width="100%" cellpadding="0" cellspacing="0">
+		  			<tr>
+		   				<td valign="top" id="QLaunhMenu"  >
+			   				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server">
+								
+<WebPartPages:ListViewWebPart runat="server" __MarkupType="xmlmarkup" WebPart="true" __WebPartId="{CE658903-8B68-4B2D-8BD3-80407D945C8A}" >
+<WebPart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Title>Resources</Title>
+  <FrameType>Default</FrameType>
+  <Description>Use the Links list for links to Web pages that your team members will find interesting or useful.</Description>
+  <IsIncluded>false</IsIncluded>
+  <PartOrder>2</PartOrder>
+  <FrameState>Normal</FrameState>
+  <Height />
+  <Width />
+  <AllowRemove>true</AllowRemove>
+  <AllowZoneChange>true</AllowZoneChange>
+  <AllowMinimize>true</AllowMinimize>
+  <AllowConnect>true</AllowConnect>
+  <AllowEdit>true</AllowEdit>
+  <AllowHide>true</AllowHide>
+  <IsVisible>true</IsVisible>
+  <DetailLink>/ResourceCentre/Lists/Resources/AllItems.aspx</DetailLink>
+  <HelpLink />
+  <HelpMode>Modeless</HelpMode>
+  <Dir>Default</Dir>
+  <PartImageSmall />
+  <MissingAssembly>Cannot import this Web Part.</MissingAssembly>
+  <PartImageLarge />
+  <IsIncludedFilter />
+  <ExportControlledProperties>false</ExportControlledProperties>
+  <ConnectionID>00000000-0000-0000-0000-000000000000</ConnectionID>
+  <ID>g_ce658903_8b68_4b2d_8bd3_80407d945c8a</ID>
+  <ListName xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">{40831626-62F5-452B-ACF2-DAF6EA011D89}</ListName>
+  <WebId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">00000000-0000-0000-0000-000000000000</WebId>
+  <ListViewXml xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">&lt;View Name="{CE658903-8B68-4B2D-8BD3-80407D945C8A}" Type="HTML" Hidden="TRUE" DisplayName="" Url="/ResourceCentre/default.aspx" Level="1" BaseViewID="0" ContentTypeID="0x"&gt;&lt;ViewHeader&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE width="100%" cellspacing=0 cellpadding=0 border=0&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;
+ctx = new ContextInfo();
+ctx.listBaseType = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="BaseType"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listTemplate = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="ServerTemplate"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;List/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.view = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listUrlDir = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListUrlDir ServerRel="TRUE" URLEncodeAsURL="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpPath ServerRel="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpRoot = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpVDir/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.imagesPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;/_layouts/images/&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.PortalUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="PortalUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.RecycleBinEnabled = ]]&gt;&lt;/HTML&gt;&lt;ProjectProperty Select="RecycleBinEnabled"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.OfficialFileName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ServerProperty Select="OfficialFileName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.WriteSecurity = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="WriteSecurity"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SiteTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ListTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="DISPLAY" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.editFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="EDIT" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.isWebEditorPreview = ]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="WebEditorPreview"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;1&lt;/Case&gt;&lt;Default&gt;0&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ctxId = ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+g_ViewIdToViewCounterMap[ ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[ ]= ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.CurrentUserId = ]]&gt;&lt;/HTML&gt;&lt;UserID AllowAnonymous="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ModeratedList"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isModerated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ForceCheckout"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isForceCheckout = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableMinorVersions"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.EnableMinorVersions = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="VersioningEnabled"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.verEnabled = 1;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RecursiveView"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.recursiveView = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="WorkflowsAssociated"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.WorkflowsAssociated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableContentTypes"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.ContentTypesEnabled = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ 
+ctx]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[ = ctx;
+&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="ltr"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("left");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("right");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ID="]]&gt;&lt;/HTML&gt;&lt;WebQueryInfo/&gt;&lt;HTML&gt;&lt;![CDATA[" class="ms-summarycustombody" style="margin-bottom: 5px;"  cellpadding=0 cellspacing=0 border=0&gt;
+                     ]]&gt;&lt;/HTML&gt;&lt;/ViewHeader&gt;&lt;ViewBody&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px" class="ms-vb"&gt;&lt;img src="/_layouts/images/square.gif" alt=""&gt;&amp;nbsp;&lt;/td&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px;padding-left: 5px;" class="ms-vb"&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;/TD&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;/TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;/ViewBody&gt;&lt;ViewFooter&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewFooter&gt;&lt;Toolbar Position="After" Type="Freeform"&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt;&lt;![CDATA[ &lt;table width=100% cellpadding=0 cellspacing=0 border=0 &gt; &lt;tr&gt; &lt;td colspan="2" class="ms-partline"&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=1 alt=""&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td class="ms-addnew" style="padding-bottom: 3px"&gt; &lt;img src="/_layouts/images/rect.gif" alt=""&gt;&amp;nbsp;&lt;a class="ms-addnew" ID="idHomePageNewLink" href="]]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[" ONCLICK="javascript:NewItem(']]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[', true);javascript:return false;" target="_self"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Add new link&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=5 alt=""&gt;&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;/Toolbar&gt;&lt;RowLimitExceeded&gt;&lt;HTML&gt;&lt;![CDATA[&lt;table class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+					&lt;TR&gt;&lt;TD Class="ms-vb"&gt;
+					&lt;a href="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="DefaultViewUrl"/&gt;&lt;HTML&gt;&lt;![CDATA[" ID=onetidMoreFavs&gt;
+					]]&gt;&lt;/HTML&gt;&lt;HTML&gt;(More Links...)&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+					&lt;/a&gt;&lt;/TD&gt;&lt;/TR&gt;
+                    &lt;tr&gt;&lt;td height="8"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="8" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+					]]&gt;&lt;/HTML&gt;&lt;/RowLimitExceeded&gt;&lt;ViewEmpty&gt;&lt;HTML&gt;&lt;![CDATA[
+                       &lt;TABLE class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+                          &lt;TR&gt;&lt;TD class="ms-vb"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;There are currently no favorite links to display.&lt;/HTML&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt; To add a new link, click &amp;quot;Add new link&amp;quot; below.&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;HTML&gt;&lt;![CDATA[
+                          &lt;/TD&gt;&lt;/TR&gt;&lt;tr&gt;&lt;td height="5"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="5" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewEmpty&gt;&lt;Query&gt;&lt;OrderBy&gt;&lt;FieldRef Name="Order" Ascending="TRUE"/&gt;&lt;/OrderBy&gt;&lt;/Query&gt;&lt;ViewFields&gt;&lt;FieldRef Name="URL" Explicit="TRUE"/&gt;&lt;FieldRef Name="URLNoMenu"/&gt;&lt;/ViewFields&gt;&lt;RowLimit&gt;20&lt;/RowLimit&gt;&lt;/View&gt;</ListViewXml>
+  <ViewFlag xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">9</ViewFlag>
+  <ViewContentTypeId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">0x</ViewContentTypeId>
+</WebPart>
+</WebPartPages:ListViewWebPart>
+
+<WebPartPages:ListViewWebPart runat="server" __MarkupType="xmlmarkup" WebPart="true" __WebPartId="{2D54AA03-DF05-4EAC-B535-7E54530B4300}" >
+<WebPart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Title>Quick Links</Title>
+  <FrameType>Default</FrameType>
+  <Description>Use the Links list for links to Web pages that your team members will find interesting or useful.</Description>
+  <IsIncluded>true</IsIncluded>
+  <PartOrder>3</PartOrder>
+  <FrameState>Normal</FrameState>
+  <Height />
+  <Width />
+  <AllowRemove>true</AllowRemove>
+  <AllowZoneChange>true</AllowZoneChange>
+  <AllowMinimize>true</AllowMinimize>
+  <AllowConnect>true</AllowConnect>
+  <AllowEdit>true</AllowEdit>
+  <AllowHide>true</AllowHide>
+  <IsVisible>true</IsVisible>
+  <DetailLink>/ResourceCentre/Lists/QuickLinks/AllItems.aspx</DetailLink>
+  <HelpLink />
+  <HelpMode>Modeless</HelpMode>
+  <Dir>Default</Dir>
+  <PartImageSmall />
+  <MissingAssembly>Cannot import this Web Part.</MissingAssembly>
+  <PartImageLarge />
+  <IsIncludedFilter />
+  <ExportControlledProperties>false</ExportControlledProperties>
+  <ConnectionID>00000000-0000-0000-0000-000000000000</ConnectionID>
+  <ID>g_2d54aa03_df05_4eac_b535_7e54530b4300</ID>
+  <ListName xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">{799A3F49-DAC8-4002-9384-2CFE8C264BD9}</ListName>
+  <WebId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">00000000-0000-0000-0000-000000000000</WebId>
+  <ListViewXml xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">&lt;View Name="{2D54AA03-DF05-4EAC-B535-7E54530B4300}" Type="HTML" Hidden="TRUE" DisplayName="" Url="/ResourceCentre/default.aspx" Level="1" BaseViewID="0" ContentTypeID="0x"&gt;&lt;ViewHeader&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE width="100%" cellspacing=0 cellpadding=0 border=0&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;
+ctx = new ContextInfo();
+ctx.listBaseType = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="BaseType"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listTemplate = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="ServerTemplate"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;List/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.view = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listUrlDir = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListUrlDir ServerRel="TRUE" URLEncodeAsURL="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpPath ServerRel="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpRoot = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpVDir/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.imagesPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;/_layouts/images/&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.PortalUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="PortalUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.RecycleBinEnabled = ]]&gt;&lt;/HTML&gt;&lt;ProjectProperty Select="RecycleBinEnabled"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.OfficialFileName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ServerProperty Select="OfficialFileName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.WriteSecurity = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="WriteSecurity"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SiteTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ListTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="DISPLAY" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.editFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="EDIT" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.isWebEditorPreview = ]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="WebEditorPreview"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;1&lt;/Case&gt;&lt;Default&gt;0&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ctxId = ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+g_ViewIdToViewCounterMap[ ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[ ]= ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.CurrentUserId = ]]&gt;&lt;/HTML&gt;&lt;UserID AllowAnonymous="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ModeratedList"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isModerated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ForceCheckout"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isForceCheckout = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableMinorVersions"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.EnableMinorVersions = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="VersioningEnabled"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.verEnabled = 1;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RecursiveView"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.recursiveView = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="WorkflowsAssociated"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.WorkflowsAssociated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableContentTypes"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.ContentTypesEnabled = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ 
+ctx]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[ = ctx;
+&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="ltr"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("left");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("right");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ID="]]&gt;&lt;/HTML&gt;&lt;WebQueryInfo/&gt;&lt;HTML&gt;&lt;![CDATA[" class="ms-summarycustombody" style="margin-bottom: 5px;"  cellpadding=0 cellspacing=0 border=0&gt;
+                     ]]&gt;&lt;/HTML&gt;&lt;/ViewHeader&gt;&lt;ViewBody&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px" class="ms-vb"&gt;&lt;img src="/_layouts/images/square.gif" alt=""&gt;&amp;nbsp;&lt;/td&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px;padding-left: 5px;" class="ms-vb"&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;/TD&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;/TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;/ViewBody&gt;&lt;ViewFooter&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewFooter&gt;&lt;Toolbar Position="After" Type="Freeform"&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt;&lt;![CDATA[ &lt;table width=100% cellpadding=0 cellspacing=0 border=0 &gt; &lt;tr&gt; &lt;td colspan="2" class="ms-partline"&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=1 alt=""&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td class="ms-addnew" style="padding-bottom: 3px"&gt; &lt;img src="/_layouts/images/rect.gif" alt=""&gt;&amp;nbsp;&lt;a class="ms-addnew" ID="idHomePageNewLink" href="]]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[" ONCLICK="javascript:NewItem(']]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[', true);javascript:return false;" target="_self"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Add new link&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=5 alt=""&gt;&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;/Toolbar&gt;&lt;RowLimitExceeded&gt;&lt;HTML&gt;&lt;![CDATA[&lt;table class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+					&lt;TR&gt;&lt;TD Class="ms-vb"&gt;
+					&lt;a href="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="DefaultViewUrl"/&gt;&lt;HTML&gt;&lt;![CDATA[" ID=onetidMoreFavs&gt;
+					]]&gt;&lt;/HTML&gt;&lt;HTML&gt;(More Links...)&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+					&lt;/a&gt;&lt;/TD&gt;&lt;/TR&gt;
+                    &lt;tr&gt;&lt;td height="8"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="8" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+					]]&gt;&lt;/HTML&gt;&lt;/RowLimitExceeded&gt;&lt;ViewEmpty&gt;&lt;HTML&gt;&lt;![CDATA[
+                       &lt;TABLE class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+                          &lt;TR&gt;&lt;TD class="ms-vb"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;There are currently no favorite links to display.&lt;/HTML&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt; To add a new link, click &amp;quot;Add new link&amp;quot; below.&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;HTML&gt;&lt;![CDATA[
+                          &lt;/TD&gt;&lt;/TR&gt;&lt;tr&gt;&lt;td height="5"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="5" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewEmpty&gt;&lt;Query&gt;&lt;OrderBy&gt;&lt;FieldRef Name="Order" Ascending="TRUE"/&gt;&lt;/OrderBy&gt;&lt;/Query&gt;&lt;ViewFields&gt;&lt;FieldRef Name="URL" Explicit="TRUE"/&gt;&lt;FieldRef Name="URLNoMenu"/&gt;&lt;/ViewFields&gt;&lt;RowLimit&gt;20&lt;/RowLimit&gt;&lt;/View&gt;</ListViewXml>
+  <ViewFlag xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">9</ViewFlag>
+  <ViewContentTypeId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">0x</ViewContentTypeId>
+</WebPart>
+</WebPartPages:ListViewWebPart>
+
+<WebPartPages:ListViewWebPart runat="server" __MarkupType="xmlmarkup" WebPart="true" __WebPartId="{2CC30F8F-CF97-41CB-9D01-346E4EF2833B}" >
+<WebPart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Title>The RC</Title>
+  <FrameType>Default</FrameType>
+  <Description />
+  <IsIncluded>true</IsIncluded>
+  <PartOrder>4</PartOrder>
+  <FrameState>Normal</FrameState>
+  <Height />
+  <Width />
+  <AllowRemove>true</AllowRemove>
+  <AllowZoneChange>true</AllowZoneChange>
+  <AllowMinimize>true</AllowMinimize>
+  <AllowConnect>true</AllowConnect>
+  <AllowEdit>true</AllowEdit>
+  <AllowHide>true</AllowHide>
+  <IsVisible>true</IsVisible>
+  <DetailLink>/ResourceCentre/Lists/TheRC/Forms/AllPages.aspx</DetailLink>
+  <HelpLink />
+  <HelpMode>Modeless</HelpMode>
+  <Dir>Default</Dir>
+  <PartImageSmall />
+  <MissingAssembly>Cannot import this Web Part.</MissingAssembly>
+  <PartImageLarge />
+  <IsIncludedFilter />
+  <ExportControlledProperties>false</ExportControlledProperties>
+  <ConnectionID>00000000-0000-0000-0000-000000000000</ConnectionID>
+  <ID>g_2cc30f8f_cf97_41cb_9d01_346e4ef2833b</ID>
+  <ListName xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">{20BEBC93-DB00-4806-BD06-3699F22E38BB}</ListName>
+  <WebId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">00000000-0000-0000-0000-000000000000</WebId>
+  <ListViewXml xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">&lt;View Name="{2CC30F8F-CF97-41CB-9D01-346E4EF2833B}" Type="HTML" Hidden="TRUE" DisplayName="" Url="/ResourceCentre/default.aspx" Level="1" BaseViewID="0" ContentTypeID="0x"&gt;&lt;ViewFields&gt;&lt;FieldRef Name="LinkFilenameNoMenu"/&gt;&lt;/ViewFields&gt;&lt;Query/&gt;&lt;Aggregations Value="Off"/&gt;&lt;RowLimit&gt;100&lt;/RowLimit&gt;&lt;GroupByHeader&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TBODY id="titl]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[" groupString="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByValueString"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;&lt;TR&gt;&lt;TD colspan="100"]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="GroupByIndent"/&gt;&lt;/Expr&gt;&lt;Case Value="0"&gt;&lt;HTML&gt;&lt;![CDATA[ class="ms-gb" ]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[ class="ms-gb2" ]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ nowrap&gt;&lt;img src="/_layouts/images/blank.gif" alt="" height=1 width=]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByIndent"/&gt;&lt;HTML&gt;&lt;![CDATA[&gt;&lt;a href="javascript:" onclick="javascript:ExpCollGroup(']]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[','img_]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[');return false;"&gt;&lt;img id="img_]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[" src="/_layouts/images/minus.gif" alt="]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Expand/Collapse&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[" border="0"&gt;&lt;/a&gt;&amp;nbsp;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;a href="javascript:" onclick="javascript:ExpCollGroup(']]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[','img_]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[');return false;"&gt;]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByField" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt; :&amp;nbsp;]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByValue"/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;]]&gt;&lt;/HTML&gt;&lt;/GroupByHeader&gt;&lt;GroupByFooter&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="GroupByIndent"/&gt;&lt;/Expr&gt;&lt;Case Value="0"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TBODY id="foot]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[_"&gt;&lt;/TBODY&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default/&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="GroupByCollapse"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;ExpCollGroup(']]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[','img_]]&gt;&lt;/HTML&gt;&lt;GetVar Name="GroupByLevelString"/&gt;&lt;HTML&gt;&lt;![CDATA[');&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default/&gt;&lt;/Switch&gt;&lt;/GroupByFooter&gt;&lt;ViewHeader&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE width="100%" cellspacing=0 cellpadding=0 border=0&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;
+ctx = new ContextInfo();
+ctx.listBaseType = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="BaseType"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listTemplate = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="ServerTemplate"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;List/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.view = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listUrlDir = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListUrlDir ServerRel="TRUE" URLEncodeAsURL="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpPath ServerRel="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpRoot = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpVDir/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.imagesPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;/_layouts/images/&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.PortalUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="PortalUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.RecycleBinEnabled = ]]&gt;&lt;/HTML&gt;&lt;ProjectProperty Select="RecycleBinEnabled"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.OfficialFileName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ServerProperty Select="OfficialFileName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.WriteSecurity = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="WriteSecurity"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SiteTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ListTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="DISPLAY" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.editFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="EDIT" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.isWebEditorPreview = ]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="WebEditorPreview"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;1&lt;/Case&gt;&lt;Default&gt;0&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ctxId = ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+g_ViewIdToViewCounterMap[ ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[ ]= ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.CurrentUserId = ]]&gt;&lt;/HTML&gt;&lt;UserID AllowAnonymous="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ModeratedList"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isModerated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ForceCheckout"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isForceCheckout = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableMinorVersions"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.EnableMinorVersions = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="VersioningEnabled"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.verEnabled = 1;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RecursiveView"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.recursiveView = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="WorkflowsAssociated"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.WorkflowsAssociated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableContentTypes"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.ContentTypesEnabled = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ 
+ctx]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[ = ctx;
+&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="ltr"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("left");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("right");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT LANGUAGE="VBSCRIPT"&gt;
+    On Error Resume Next
+    Set EditDocumentButton = CreateObject("SharePoint.OpenDocuments.3")
+    If (IsObject(EditDocumentButton)) Then
+        fNewDoc3 = true
+    Else
+        Set EditDocumentButton = CreateObject("SharePoint.OpenDocuments.2")
+        If (IsObject(EditDocumentButton)) Then
+            fNewDoc2 = true
+        Else
+            Set EditDocumentButton = CreateObject("SharePoint.OpenDocuments.1")
+        End If
+    End If    
+    fNewDoc = IsObject(EditDocumentButton)
+&lt;/SCRIPT&gt;
+]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ID="onetidDoclibViewTbl0]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[" width="100%" class="ms-summarystandardbody" border=0 cellspacing=0 cellpadding=1 dir="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Direction" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" summary="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Title" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;&lt;TR class="ms-viewheadertr" VALIGN=TOP&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;IFRAME src="javascript:false;" id="FilterIframe]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" name="FilterIframe]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" style="display:none" height="0" width="0" title="]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Hidden frame to filter list&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[" FilterLink="]]&gt;&lt;/HTML&gt;&lt;FilterLink HTMLEncode="TRUE" Paged="FALSE"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;&lt;/IFRAME&gt;]]&gt;&lt;/HTML&gt;&lt;Fields&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Name"/&gt;&lt;/Expr&gt;&lt;Case Value="Attachments"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh-icon"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;/Expr&gt;&lt;Case Value="Note"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Filterable"/&gt;&lt;/Expr&gt;&lt;Case Value="FALSE"&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Sortable"/&gt;&lt;/Expr&gt;&lt;Case Value="FALSE"&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Name"/&gt;&lt;/Expr&gt;&lt;Case Value="SelectedFlag"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh3-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;Property Select="ShowFieldImnHeader"/&gt;&lt;PresenceEnabled/&gt;&lt;/Expr&gt;&lt;Case Value="UserTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="UserMultiTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="SortDisable"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;Property Select="ShowFieldImnHeader"/&gt;&lt;PresenceEnabled/&gt;&lt;/Expr&gt;&lt;Case Value="UserTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="UserMultiTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="HeaderImage"/&gt;&lt;/Expr&gt;&lt;Case Value=""&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh-icon"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewHeader&gt;&lt;ViewBody&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TR class="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="AlternateStyle"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="AlternateStyle"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;ms-alternating&lt;/Expr2&gt;&lt;Then&gt;&lt;SetVar Scope="Request" Name="AlternateStyle"/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;SetVar Scope="Request" Name="AlternateStyle"&gt;ms-alternating&lt;/SetVar&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;Fields&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD Class="]]&gt;&lt;/HTML&gt;&lt;FieldSwitch&gt;&lt;Expr&gt;&lt;Property Select="ClassInfo"/&gt;&lt;/Expr&gt;&lt;Case Value="Menu"&gt;&lt;HTML&gt;&lt;![CDATA[ms-vb-title" height="100%]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="Icon"&gt;ms-vb-icon&lt;/Case&gt;&lt;Default&gt;&lt;FieldSwitch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;PresenceEnabled/&gt;&lt;/Expr&gt;&lt;Case Value="UserTRUE"&gt;ms-vb-user&lt;/Case&gt;&lt;Case Value="UserMultiTRUE"&gt;ms-vb-user&lt;/Case&gt;&lt;Default&gt;ms-vb2&lt;/Default&gt;&lt;/FieldSwitch&gt;&lt;/Default&gt;&lt;/FieldSwitch&gt;&lt;HTML&gt;&lt;![CDATA["&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewBody&gt;&lt;ViewFooter&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewFooter&gt;&lt;RowLimitExceeded&gt;&lt;HTML&gt;&lt;![CDATA[
+        &lt;TABLE class="ms-summarystandardbody" width="100%" border=0&gt;&lt;TR&gt;&lt;TD Class="ms-vb"&gt;&lt;a href="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="DefaultViewUrl"/&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RootFolder"/&gt;&lt;/Expr&gt;&lt;Case Value=""/&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[?RootFolder=]]&gt;&lt;/HTML&gt;&lt;GetVar Name="RootFolder" URLEncode="TRUE"/&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[" ID=onetidMore&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;(More Items...)&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt;&lt;/TD&gt;&lt;/TR&gt;
+        &lt;tr&gt;&lt;td height="8"&gt;&lt;img src="]]&gt;&lt;/HTML&gt;&lt;HttpVDir/&gt;&lt;HTML&gt;&lt;![CDATA[/_layouts/images/blank.gif" width="1" height="8" alt=""&gt;
+        &lt;/td&gt;&lt;/tr&gt;
+        &lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;/RowLimitExceeded&gt;&lt;ViewEmpty&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;
+ctx = new ContextInfo();
+ctx.listBaseType = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="BaseType"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listTemplate = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="ServerTemplate"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;List/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.view = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listUrlDir = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListUrlDir ServerRel="TRUE" URLEncodeAsURL="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpPath ServerRel="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpRoot = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpVDir/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.imagesPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;/_layouts/images/&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.PortalUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="PortalUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.RecycleBinEnabled = ]]&gt;&lt;/HTML&gt;&lt;ProjectProperty Select="RecycleBinEnabled"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.OfficialFileName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ServerProperty Select="OfficialFileName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.WriteSecurity = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="WriteSecurity"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SiteTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ListTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="DISPLAY" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.editFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="EDIT" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.isWebEditorPreview = ]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="WebEditorPreview"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;1&lt;/Case&gt;&lt;Default&gt;0&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ctxId = ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+g_ViewIdToViewCounterMap[ ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[ ]= ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.CurrentUserId = ]]&gt;&lt;/HTML&gt;&lt;UserID AllowAnonymous="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ModeratedList"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isModerated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ForceCheckout"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isForceCheckout = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableMinorVersions"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.EnableMinorVersions = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="VersioningEnabled"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.verEnabled = 1;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RecursiveView"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.recursiveView = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="WorkflowsAssociated"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.WorkflowsAssociated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableContentTypes"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.ContentTypesEnabled = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ 
+ctx]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[ = ctx;
+&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="ltr"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("left");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("right");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE width="100%" class="ms-listviewtable" cellspacing=0 cellpadding=0 border=0 dir="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Direction" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ID=onetidDoclibViewTbl0 width="100%" cellpadding=0 cellspacing=0 Summary="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Title" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[border=0&gt;&lt;TR class="ms-viewheadertr"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;IFRAME src="javascript:false;" id="FilterIframe]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" name="FilterIframe]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" style="display:none" height="0" width="0" title="]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Hidden frame to filter list&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[" FilterLink="]]&gt;&lt;/HTML&gt;&lt;FilterLink HTMLEncode="TRUE" Paged="FALSE"/&gt;&lt;HTML&gt;&lt;![CDATA["&gt;&lt;/IFRAME&gt;]]&gt;&lt;/HTML&gt;&lt;Fields&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Name"/&gt;&lt;/Expr&gt;&lt;Case Value="Attachments"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh-icon"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;/Expr&gt;&lt;Case Value="Note"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Filterable"/&gt;&lt;/Expr&gt;&lt;Case Value="FALSE"&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Sortable"/&gt;&lt;/Expr&gt;&lt;Case Value="FALSE"&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Name"/&gt;&lt;/Expr&gt;&lt;Case Value="SelectedFlag"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh3-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;Property Select="ShowFieldImnHeader"/&gt;&lt;PresenceEnabled/&gt;&lt;/Expr&gt;&lt;Case Value="UserTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="UserMultiTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="SortDisable"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2-nograd"&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="Type"/&gt;&lt;Property Select="ShowFieldImnHeader"/&gt;&lt;PresenceEnabled/&gt;&lt;/Expr&gt;&lt;Case Value="UserTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="UserMultiTRUETRUE"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;Property Select="HeaderImage"/&gt;&lt;/Expr&gt;&lt;Case Value=""&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh2"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TH nowrap scope="col" class="ms-vh-icon"&gt;]]&gt;&lt;/HTML&gt;&lt;IfEqual&gt;&lt;Expr1&gt;&lt;GetVar Name="Plain"/&gt;&lt;/Expr1&gt;&lt;Expr2&gt;TRUE&lt;/Expr2&gt;&lt;Then&gt;&lt;Field/&gt;&lt;/Then&gt;&lt;Else&gt;&lt;HTML&gt;&lt;![CDATA[&lt;div style="width:100%;position:relative;left:0;top:0;"&gt;&lt;TABLE style="width:100%;" Sortable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Sortable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="SortDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FilterDisable="]]&gt;&lt;/HTML&gt;&lt;GetVar Name="FilterDisable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Filterable="]]&gt;&lt;/HTML&gt;&lt;Property Select="Filterable" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" Name="]]&gt;&lt;/HTML&gt;&lt;Property Select="Name" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" CtxNum="]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[" DisplayName="]]&gt;&lt;/HTML&gt;&lt;Property Select="DisplayName" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" FieldType="]]&gt;&lt;/HTML&gt;&lt;Property Select="Type" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ResultType="]]&gt;&lt;/HTML&gt;&lt;Property Select="ResultType" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" SortFields="]]&gt;&lt;/HTML&gt;&lt;FieldSortParams HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" height="100%" cellspacing=1 cellpadding=0 class="ms-unselectedtitle" onmouseover="OnMouseOverFilter(this)"&gt;&lt;TR&gt;&lt;TD width="100%" Class="ms-vb" nowrap&gt;]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Default&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD style="position:absolute;"&gt;&lt;IMG src="/_layouts/images/blank.gif" width=13px style="visibility: hidden" alt=""&gt;&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;&lt;/TABLE&gt;&lt;/div&gt;]]&gt;&lt;/HTML&gt;&lt;/Else&gt;&lt;/IfEqual&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TH&gt;]]&gt;&lt;/HTML&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Default&gt;&lt;/Switch&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TR&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[ class="ms-summarycustombody" cellpadding=0 cellspacing=0  ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[ border=0&gt;&lt;TR&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TD Class="ms-vb"&gt; ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;HTML&gt;There are no items to show in this view of the &amp;quot;&lt;/HTML&gt;&lt;ListProperty Select="Title" HTMLEncode="TRUE"/&gt;&lt;HTML&gt;&amp;quot; wiki page library.&lt;/HTML&gt;&lt;/HTML&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt; To create a new item, click &amp;quot;Add new Wiki page&amp;quot; below.&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/TD&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/tr&gt;&lt;tr&gt;&lt;td height="5"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="5" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewEmpty&gt;&lt;Toolbar Position="After" Type="Freeform"&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt;&lt;![CDATA[ &lt;table width=100% cellpadding=0 cellspacing=0 border=0 &gt; &lt;tr&gt; &lt;td colspan="2" class="ms-partline"&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=1 alt=""&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td class="ms-addnew" style="padding-bottom: 3px"&gt; &lt;img src="/_layouts/images/rect.gif" alt=""&gt;&amp;nbsp;&lt;a class="ms-addnew" ID="idAddNewDoc" href="]]&gt;&lt;/HTML&gt;&lt;HttpVDir/&gt;&lt;HTML&gt;&lt;![CDATA[/_layouts/CreateWebPage.aspx?List=]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Name"/&gt;&lt;HTML&gt;&lt;![CDATA[&amp;RootFolder=]]&gt;&lt;/HTML&gt;&lt;GetVar Name="RootFolder" URLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[" ONCLICK="javascript:NewItem(']]&gt;&lt;/HTML&gt;&lt;HttpVDir/&gt;&lt;HTML&gt;&lt;![CDATA[/_layouts/CreateWebPage.aspx?List=]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="Name"/&gt;&lt;HTML&gt;&lt;![CDATA[&amp;RootFolder=]]&gt;&lt;/HTML&gt;&lt;GetVar Name="RootFolder" URLEncode="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[', true);javascript:return false;" target="_self"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Add new Wiki page&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=5 alt=""&gt;&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;/Toolbar&gt;&lt;/View&gt;</ListViewXml>
+  <ViewFlag xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">9</ViewFlag>
+  <ViewContentTypeId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">0x</ViewContentTypeId>
+</WebPart>
+</WebPartPages:ListViewWebPart>
+
+
+<WebPartPages:ListViewWebPart runat="server" __MarkupType="xmlmarkup" WebPart="true" __WebPartId="{CA3F8F63-F058-4552-8D82-9022E43D9C24}" >
+<WebPart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Title>My Personal RC</Title>
+  <FrameType>Default</FrameType>
+  <Description>Use the Links list for links to Web pages that your team members will find interesting or useful.</Description>
+  <IsIncluded>true</IsIncluded>
+  <PartOrder>6</PartOrder>
+  <FrameState>Normal</FrameState>
+  <Height />
+  <Width />
+  <AllowRemove>true</AllowRemove>
+  <AllowZoneChange>true</AllowZoneChange>
+  <AllowMinimize>true</AllowMinimize>
+  <AllowConnect>true</AllowConnect>
+  <AllowEdit>true</AllowEdit>
+  <AllowHide>true</AllowHide>
+  <IsVisible>true</IsVisible>
+  <DetailLink>/ResourceCentre/Lists/MyPersonalRC/AllItems.aspx</DetailLink>
+  <HelpLink />
+  <HelpMode>Modeless</HelpMode>
+  <Dir>Default</Dir>
+  <PartImageSmall />
+  <MissingAssembly>Cannot import this Web Part.</MissingAssembly>
+  <PartImageLarge />
+  <IsIncludedFilter />
+  <ExportControlledProperties>false</ExportControlledProperties>
+  <ConnectionID>00000000-0000-0000-0000-000000000000</ConnectionID>
+  <ID>g_ca3f8f63_f058_4552_8d82_9022e43d9c24</ID>
+  <ListName xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">{5F88A7A7-227F-4452-8D2E-23C4AF6E735F}</ListName>
+  <WebId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">00000000-0000-0000-0000-000000000000</WebId>
+  <ListViewXml xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">&lt;View Name="{CA3F8F63-F058-4552-8D82-9022E43D9C24}" Type="HTML" Hidden="TRUE" DisplayName="" Url="/ResourceCentre/default.aspx" Level="1" BaseViewID="0" ContentTypeID="0x"&gt;&lt;ViewHeader&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE width="100%" cellspacing=0 cellpadding=0 border=0&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;
+ctx = new ContextInfo();
+ctx.listBaseType = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="BaseType"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listTemplate = ]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="ServerTemplate"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;List/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.view = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.listUrlDir = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListUrlDir ServerRel="TRUE" URLEncodeAsURL="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpPath ServerRel="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.HttpRoot = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;HttpVDir/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.imagesPath = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;/_layouts/images/&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.PortalUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="PortalUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SendToLocationUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="SendToLocationUrl"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.RecycleBinEnabled = ]]&gt;&lt;/HTML&gt;&lt;ProjectProperty Select="RecycleBinEnabled"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.OfficialFileName = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ServerProperty Select="OfficialFileName"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.WriteSecurity = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="WriteSecurity"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.SiteTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ProjectProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ListTitle = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;ListProperty Select="Title"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="DISPLAY" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.editFormUrl = ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;URL Cmd="EDIT" NoID="TRUE"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.isWebEditorPreview = ]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="WebEditorPreview"/&gt;&lt;/Expr&gt;&lt;Case Value="TRUE"&gt;1&lt;/Case&gt;&lt;Default&gt;0&lt;/Default&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.ctxId = ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+g_ViewIdToViewCounterMap[ ]]&gt;&lt;/HTML&gt;&lt;ScriptQuote&gt;&lt;GetVar Name="View"/&gt;&lt;/ScriptQuote&gt;&lt;HTML&gt;&lt;![CDATA[ ]= ]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+ctx.CurrentUserId = ]]&gt;&lt;/HTML&gt;&lt;UserID AllowAnonymous="TRUE"/&gt;&lt;HTML&gt;&lt;![CDATA[;
+]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ModeratedList"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isModerated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="ForceCheckout"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.isForceCheckout = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableMinorVersions"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.EnableMinorVersions = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="VersioningEnabled"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.verEnabled = 1;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;GetVar Name="RecursiveView"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.recursiveView = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="WorkflowsAssociated"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.WorkflowsAssociated = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="EnableContentTypes"/&gt;&lt;/Expr&gt;&lt;Case Value="1"&gt;
+ctx.ContentTypesEnabled = true;
+&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[ 
+ctx]]&gt;&lt;/HTML&gt;&lt;Counter Type="View"/&gt;&lt;HTML&gt;&lt;![CDATA[ = ctx;
+&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;Switch&gt;&lt;Expr&gt;&lt;ListProperty Select="Direction"/&gt;&lt;/Expr&gt;&lt;Case Value="ltr"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("left");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;Case Value="rtl"&gt;&lt;HTML&gt;&lt;![CDATA[&lt;SCRIPT&gt;FixTextAlignForBidi("right");&lt;/SCRIPT&gt;]]&gt;&lt;/HTML&gt;&lt;/Case&gt;&lt;/Switch&gt;&lt;HTML&gt;&lt;![CDATA[&lt;tr&gt;&lt;td&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;TABLE ID="]]&gt;&lt;/HTML&gt;&lt;WebQueryInfo/&gt;&lt;HTML&gt;&lt;![CDATA[" class="ms-summarycustombody" style="margin-bottom: 5px;"  cellpadding=0 cellspacing=0 border=0&gt;
+                     ]]&gt;&lt;/HTML&gt;&lt;/ViewHeader&gt;&lt;ViewBody&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px" class="ms-vb"&gt;&lt;img src="/_layouts/images/square.gif" alt=""&gt;&amp;nbsp;&lt;/td&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;TD style="padding-bottom: 5px;padding-left: 5px;" class="ms-vb"&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;Field/&gt;&lt;HTML&gt;&lt;![CDATA[
+                            &lt;/TD&gt;
+                        ]]&gt;&lt;/HTML&gt;&lt;/Fields&gt;&lt;HTML&gt;&lt;![CDATA[
+                        &lt;/TR&gt;
+                    ]]&gt;&lt;/HTML&gt;&lt;/ViewBody&gt;&lt;ViewFooter&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewFooter&gt;&lt;Toolbar Position="After" Type="Freeform"&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt;&lt;![CDATA[ &lt;table width=100% cellpadding=0 cellspacing=0 border=0 &gt; &lt;tr&gt; &lt;td colspan="2" class="ms-partline"&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=1 alt=""&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td class="ms-addnew" style="padding-bottom: 3px"&gt; &lt;img src="/_layouts/images/rect.gif" alt=""&gt;&amp;nbsp;&lt;a class="ms-addnew" ID="idHomePageNewLink" href="]]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[" ONCLICK="javascript:NewItem(']]&gt;&lt;/HTML&gt;&lt;URL Cmd="New"/&gt;&lt;HTML&gt;&lt;![CDATA[', true);javascript:return false;" target="_self"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;Add new link&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[&lt;/a&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt;&lt;IMG SRC="/_layouts/images/blank.gif" width=1 height=5 alt=""&gt;&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;]]&gt;&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;/Toolbar&gt;&lt;RowLimitExceeded&gt;&lt;HTML&gt;&lt;![CDATA[&lt;table class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+					&lt;TR&gt;&lt;TD Class="ms-vb"&gt;
+					&lt;a href="]]&gt;&lt;/HTML&gt;&lt;ListProperty Select="DefaultViewUrl"/&gt;&lt;HTML&gt;&lt;![CDATA[" ID=onetidMoreFavs&gt;
+					]]&gt;&lt;/HTML&gt;&lt;HTML&gt;(More Links...)&lt;/HTML&gt;&lt;HTML&gt;&lt;![CDATA[
+					&lt;/a&gt;&lt;/TD&gt;&lt;/TR&gt;
+                    &lt;tr&gt;&lt;td height="8"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="8" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+					]]&gt;&lt;/HTML&gt;&lt;/RowLimitExceeded&gt;&lt;ViewEmpty&gt;&lt;HTML&gt;&lt;![CDATA[
+                       &lt;TABLE class="ms-summarycustombody" cellpadding=0 cellspacing=0 border=0&gt;
+                          &lt;TR&gt;&lt;TD class="ms-vb"&gt;]]&gt;&lt;/HTML&gt;&lt;HTML&gt;There are currently no favorite links to display.&lt;/HTML&gt;&lt;IfHasRights&gt;&lt;RightsChoices&gt;&lt;RightsGroup PermAddListItems="required"/&gt;&lt;/RightsChoices&gt;&lt;Then&gt;&lt;HTML&gt; To add a new link, click &amp;quot;Add new link&amp;quot; below.&lt;/HTML&gt;&lt;/Then&gt;&lt;/IfHasRights&gt;&lt;HTML&gt;&lt;![CDATA[
+                          &lt;/TD&gt;&lt;/TR&gt;&lt;tr&gt;&lt;td height="5"&gt;&lt;img src="/_layouts/images/blank.gif" width="1" height="5" alt=""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/TABLE&gt;]]&gt;&lt;/HTML&gt;&lt;/ViewEmpty&gt;&lt;Query&gt;&lt;OrderBy&gt;&lt;FieldRef Name="Order" Ascending="TRUE"/&gt;&lt;/OrderBy&gt;&lt;/Query&gt;&lt;ViewFields&gt;&lt;FieldRef Name="URL" Explicit="TRUE"/&gt;&lt;FieldRef Name="URLNoMenu"/&gt;&lt;/ViewFields&gt;&lt;RowLimit&gt;20&lt;/RowLimit&gt;&lt;/View&gt;</ListViewXml>
+  <ViewFlag xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">9</ViewFlag>
+  <ViewContentTypeId xmlns="http://schemas.microsoft.com/WebPart/v2/ListView">0x</ViewContentTypeId>
+</WebPart>
+</WebPartPages:ListViewWebPart>
+			  				</asp:ContentPlaceHolder>
+			  
+		   				</td>
+		  				<td valign="top" style="width:80%;padding-left:5px;" >
+			   				<asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
+		   				</td>
+		   				
+		   
+		  			</tr>
+		 		</table>            
+				
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- FOOTER -->
+        <div id="mti-footer">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td id="footer-privacy">
+<%--                         <a href="/PrivacyStatement.aspx" style="color: White" runat="server">Privacy Statement</a>
+                        <img src="/_layouts/MTI/Images/footer_links_separator.jpg" alt="">
+                         <a href="/termsofuse.aspx" style="color: White" runat="server">Terms of Use</a>
+                        <img src="/_layouts/MTI/Images/footer_links_separator.jpg" alt="">
+--%>                        
+                        <a href="<%$SPUrl:~sitecollection/Lists/Survey/NewForm.aspx%>" style="color: White" runat="server">Rate MTI Intranet</a>                        
+                    </td>
+                    <td id="footer-copyright">
+                        &copy 2010 Ministry of Trade and Industry
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- OTHER REQUIRED PLACEHOLDERS (HIDDEN) -->
+    <asp:Panel ID="Panel1" Visible="false" runat="server">
+        <!-- PRIMARY NAVIGATION -->
+        <SharePoint:AspMenu ID="GlobalNav" runat="server" DataSourceID="topNavDS" Orientation="Horizontal"
+            StaticDisplayLevels="1" MaximumDynamicDisplayLevels="0" StaticSubMenuIndent="0"
+            DynamicHorizontalOffset="0" StaticEnableDefaultPopOutImage="false" ItemWrap="false"
+            SkipLinkText="<%$Resources:cms,masterpages_skiplinktext%>" CssClass="globalNav">
+            <StaticMenuItemStyle CssClass="globalNavItem" ItemSpacing="0px" />
+            <StaticSelectedStyle CssClass="globalNavItemActive" />
+            <StaticHoverStyle CssClass="globalNavItemHover" />
+            <DynamicMenuStyle CssClass="globalNavMenu" />
+            <DynamicMenuItemStyle CssClass="globalNavMenuItem" />
+            <DynamicHoverStyle CssClass="globalNavMenuItemHover" />
+            <DynamicSelectedStyle CssClass="globalNavMenuItemActive" />
+        </SharePoint:AspMenu>
+        <publishingnavigation:portalsitemapdatasource id="topNavDS" runat="server" sitemapprovider="CombinedNavSiteMapProvider"
+            enableviewstate="true" startfromcurrentnode="true" startingnodeoffset="0" showstartingnode="false"
+            treatstartingnodeascurrent="true" trimnoncurrenttypes="Heading" />
+        <asp:ContentPlaceHolder ID="PlaceHolderSearchArea" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderPageDescription" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderPageImage" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyLeftBorder" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleLeftBorder" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleAreaSeparator" runat="server" />
+        <asp:ContentPlaceHolder ID="OSSConsole" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleRightMargin" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyAreaClass" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleAreaClass" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderBodyRightMargin" runat="server" />
+        
+        <!-- SECONDARY NAVIGATION -->
+        <asp:ContentPlaceHolder ID="PlaceHolderCalendarNavigator" runat="server" />
+       <asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server"></asp:ContentPlaceHolder>
+        
+        <asp:ContentPlaceHolder ID="PlaceHolderNavSpacer" runat="server" />
+        <asp:ContentPlaceHolder ID="PlaceHolderTitleBreadcrumb" runat="server" />	<asp:ContentPlaceHolder ID="PlaceHolderMiniConsole" runat="server" />
+
+
+    </asp:Panel>
+    <%--hide title and show contentlink--%>
+    <script type="text/javascript">
+	
+        function HideScopeDDL()
+	    {
+		    var inputs = document.getElementsByTagName('SELECT');
+		    for(var i=0;i<inputs.length;i++)
+		    {
+			    var input = inputs[i];
+			    if(input.id!=null && input.id.indexOf('StaffDirSearch')>0){
+				    input.style.display = 'none';
+			    }
+		    }
+	    }
+	
+	    HideScopeDDL();
+        //document.getElementById('ctl00_StaffDirSearch_SBScopesDDL').style.display = 'none';
+        
+        var contentLink = document.getElementById('EditContent');
+        var titleLink = document.getElementById('pagetitle');
+        if(contentLink!=null)
+        {
+            titleLink.style.display = 'block';
+        }
+        else
+        {
+            titleLink.style.display = 'none';
+        }
+    </script> 
+  
+    </form>
+
+</body>
+</html>
